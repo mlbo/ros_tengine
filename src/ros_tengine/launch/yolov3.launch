@@ -1,0 +1,23 @@
+<launch>
+<!-- Usb Camera -->
+    <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
+        <param name="video_device" value="/dev/video0" />
+        <param name="image_width" value="640" />
+        <param name="image_height" value="480" />
+        <param name="pixel_format" value="yuyv" />
+        <param name="camera_frame_id" value="usb_cam" />
+        <param name="io_method" value="mmap"/>
+    </node>
+<!-- Dispaly detect result true or false-->
+    <arg name="display_output" default="false"/>
+    <arg name="camera_topic" default="/usb_cam/image_raw"/>
+    <node name="yolov3_node" pkg="ros_tengine" type="yolov3_node" output="screen">
+      <param name="model_file" value="yolov3_uint8.tmfile"/>
+      <param name="display_output" value="$(arg display_output)"/>
+      <remap from="/usb_cam/image_raw" to="$(arg camera_topic)"/>
+      <param name="probability_threshold" value="0.5"/>
+    </node>
+
+
+
+</launch>
