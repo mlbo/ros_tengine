@@ -15,9 +15,10 @@ This is a ROS package for [Tengine](https://github.com/OAID/Tengine/blob/tengine
 ### Library ###
 
 ## ROS package ##
-* Clone this repository into your Khadas VIM3 device.
 ```bash
 git clone https://github.com/mlbo/ros_tengine.git
+cd ros_tengine
+git submodule update --init
 ```
 ```bash
 ├── Catkin_make.sh
